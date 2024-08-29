@@ -163,14 +163,22 @@ export default class Plugin {
     const { types } = this;
     const pluginState = this.getPluginState(state);
     if (value === libraryName) {
+      let hasImportNamespaceSpecifier = false;
       node.specifiers.forEach(spec => {
-        if (types.isImportSpecifier(spec)) {
-          pluginState.specified[spec.local.name] = spec.imported.name;
-        } else {
-          pluginState.libraryObjs[spec.local.name] = true;
+        if (!hasImportNamespaceSpecifier) {
+          if (types.isImportNamespaceSpecifier(spec)) {
+            hasImportNamespaceSpecifier = true;
+          }
+          if (types.isImportSpecifier(spec)) {
+            pluginState.specified[spec.local.name] = spec.imported.name;
+          } else {
+            pluginState.libraryObjs[spec.local.name] = true;
+          }
         }
       });
-      pluginState.pathsToRemove.push(path);
+      if (!hasImportNamespaceSpecifier) {
+        pluginState.pathsToRemove.push(path);
+      }
     }
   }
 
