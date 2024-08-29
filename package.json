@@ -1,5 +1,5 @@
 {
-  "name": "babel-plugin-import",
+  "name": "babel-plugin-import-as-needed",
   "version": "1.13.8",
   "description": "Component modular import plugin for babel.",
   "repository": {
@@ -12,9 +12,7 @@
     "test": "umi-test --coverage",
     "debug": "umi-test",
     "lint": "eslint --ext .js src",
-    "coveralls": "cat ./coverage/lcov.info | coveralls",
-    "prepack": "npm run build",
-    "prepublishOnly": "npm run build && father doctor && np --no-cleanup --yolo --no-publish --any-branch"
+    "coveralls": "cat ./coverage/lcov.info | coveralls"
   },
   "husky": {
     "hooks": {
