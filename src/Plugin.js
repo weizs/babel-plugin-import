@@ -156,7 +156,7 @@ export default class Plugin {
     const { node } = path;
 
     // path maybe removed by prev instances.
-    if (!node) return;
+    if (!node || !node.specifiers.length) return;
 
     const { value } = node.source;
     const { libraryName } = this;
